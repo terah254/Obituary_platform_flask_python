@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block content %}
+<article class="obituary-detail">
+    <div class="obituary-header">
+        <h1>{{ obituary.name }}</h1>
+        <div class="obituary-dates">
+            <span><i class="fas fa-birthday-cake"></i> {{ obituary.dob }}</span>
+            <span><i class="fas fa-cross"></i> {{ obituary.dod }}</span>
+        </div>
+    </div>
+    
+    <div class="obituary-content">
+        {{ obituary.content | safe }}
+    </div>
+    
+    <div class="obituary-meta">
+        <p><i class="fas fa-user-edit"></i> Memorial created by: {{ obituary.author }}</p>
+        <p><i class="fas fa-calendar-alt"></i> Published: {{ obituary.published }}</p>
+    </div>
+    
+    <a href="{{ url_for('view_obituaries') }}" class="btn btn-primary">
+        <i class="fas fa-arrow-left"></i> Back to Obituaries
+    </a>
+</article>
+{% endblock %}

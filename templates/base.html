@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Obituary Platform{% endblock %}</title>
+
+    <!-- Social Media Optimization -->
+    <meta name="description" content="Celebrate the lives of loved ones. Share and view heartfelt obituaries on our platform.">
+    <meta property="og:title" content="Obituary Platform">
+    <meta property="og:description" content="Celebrate the lives of loved ones. Share and view heartfelt obituaries on our platform.">
+    <meta property="og:image" content="{{ url_for('static', filename='images/share-image.jpg') }}">
+    <meta property="og:url" content="{{ url_for('home') }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Obituary Platform">
+    <meta name="twitter:description" content="Celebrate the lives of loved ones. Share and view heartfelt obituaries on our platform.">
+    <meta name="twitter:image" content="{{ url_for('static', filename='images/share-image.jpg') }}">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1><a href="{{ url_for('home') }}">Memorials</a></h1>
+            <nav>
+                <ul>
+                    <li><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('view_obituaries') }}">View Obituaries</a></li>
+                    <li><a href="{{ url_for('submit_obituary') }}">Submit Obituary</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <div class="flash {{ category }}">{{ message }}</div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Memorials. All rights reserved.</p>
+            <!-- Social Media Links -->
+            <ul class="social-media">
+                <li><a href="https://twitter.com/yourprofile" target="_blank"><i class="fab fa-twitter"></i></a></li>
+                <li><a href="https://facebook.com/yourpage" target="_blank"><i class="fab fa-facebook"></i></a></li>
+                <li><a href="https://linkedin.com/yourprofile" target="_blank"><i class="fab fa-linkedin"></i></a></li>
+            </ul>
+        </div>
+    </footer>
+</body>
+</html>

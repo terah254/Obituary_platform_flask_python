@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="obituaries-list">
+    <h2>Recent Memorials</h2>
+    
+    <!-- Search Bar -->
+    <div class="search-bar">
+        <form method="GET" action="{{ url_for('search_obituaries') }}">
+            <input type="text" name="query" placeholder="Search obituaries..." required>
+            <button type="submit">Search</button>
+        </form>
+    </div>
+    
+    <!-- Obituaries Grid -->
+    <div class="obituaries-grid">
+        {% if obituaries %}
+            {% for obituary in obituaries %}
+            <div class="obituary-card">
+                <h3>{{ obituary.name }}</h3>
+                <div class="dates">
+                    <span>{{ obituary.date_of_birth.strftime('%b %d, %Y') }} - {{ obituary.date_of_death.strftime('%b %d, %Y') }}</span>
+                </div>
+                <p class="excerpt">{{ obituary.content[:150] }}...</p>
+                <div class="card-footer">
+                    <span>Submitted by {{ obituary.author }}</span>
+                    <a href="{{ url_for('obituary_detail', slug=obituary['slug']) }}" class="btn btn-small">Read More</a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p>No obituaries to display.</p>
+        {% endif %}
+    </div>
+
+    <!-- Pagination Controls -->
+    {% if total_pages > 1 %}
+    <nav class="pagination">
+        <ul>
+            {% if current_page > 1 %}
+                <li><a href="{{ url_for('view_obituaries', page=current_page - 1) }}">Previous</a></li>
+            {% endif %}
+
+            {% for page in range(1, total_pages + 1) %}
+                <li>
+                    <a href="{{ url_for('view_obituaries', page=page) }}" 
+                       class="{{ 'active' if page == current_page else '' }}">
+                        {{ page }}
+                    </a>
+                </li>
+            {% endfor %}
+
+            {% if current_page < total_pages %}
+                <li><a href="{{ url_for('view_obituaries', page=current_page + 1) }}">Next</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+</section>
+{% endblock %}

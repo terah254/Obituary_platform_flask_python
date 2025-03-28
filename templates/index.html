@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <h2>Honoring Loved Ones</h2>
+        <p>Create and share beautiful memorials for those who have passed</p>
+        <div class="cta-buttons">
+            <a href="{{ url_for('view_obituaries') }}" class="btn">View Memorials</a>
+            <a href="{{ url_for('submit_obituary') }}" class="btn btn-secondary">Create Memorial</a>
+        </div>
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature-card">
+        <i class="fas fa-book-open"></i>
+        <h3>Share Stories</h3>
+        <p>Celebrate lives through shared memories and stories</p>
+    </div>
+    <div class="feature-card">
+        <i class="fas fa-users"></i>
+        <h3>Connect</h3>
+        <p>Bring friends and family together in remembrance</p>
+    </div>
+    <div class="feature-card">
+        <i class="fas fa-heart"></i>
+        <h3>Preserve</h3>
+        <p>Create a lasting tribute for future generations</p>
+    </div>
+</section>
+{% endblock %}
